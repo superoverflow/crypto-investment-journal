@@ -9,3 +9,6 @@ GOOGLE_SHEET_ID=<google sheet id>
 ```
 npm run dev
 ```
+
+## Credits
+- (shadcn)[https://ui.shadcn.com/]
