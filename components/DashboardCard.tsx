@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowUp, ArrowDown } from "lucide-react"
+import { ArrowDown, ArrowUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -23,18 +23,17 @@ export function DashboardCard({
     <Card className={cn("w-[380px]", className)} {...props}>
       <CardHeader className="place-content-between">
         <CardTitle>{instrument}</CardTitle>
-        <Image
-          src={image}
-          alt={instrument}
-          width={32}
-          height={32}
-        />
+        <Image src={image} alt={instrument} width={32} height={32} />
       </CardHeader>
       <CardContent className="flex justify-between gap-2">
-        <p className="text-xl font-bold">{position}</p>
-        <div className="flex flex-row gap-2 px-2">
-            {change >=0 ? <ArrowUp size={16} /> : <ArrowDown size={16}/>}
-            <p className="text-sm">{change}</p>
+        <span className="text-xl font-bold">{position}</span>
+        <div
+          className={`${
+            change >= 0 ? "text-green-500" : "text-red-500"
+          } flex flex-row items-center gap-2 px-2`}
+        >
+          {change >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
+          <span className="inline-block align-bottom text-sm">{change}</span>
         </div>
       </CardContent>
     </Card>
