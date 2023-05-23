@@ -20,7 +20,7 @@ export function DashboardCard({
   ...props
 }: CardProps) {
   return (
-    <Card className={cn("min-w-[320px]", className)} {...props}>
+    <Card className={cn("w-[90%] min-w-[260px] sm:w-[380px]", className)} {...props}>
       <CardHeader className="place-content-between">
         <CardTitle>{instrument}</CardTitle>
         <Image src={image} alt={instrument} width={32} height={32} />

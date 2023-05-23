@@ -30,7 +30,7 @@ const dashboardItems = [
 export default function IndexPage() {
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap justify-center gap-2">
         {dashboardItems.map((item) => (
           <DashboardCard
             instrument={item.instrument}
