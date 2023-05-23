@@ -11,4 +11,4 @@ npm run dev
 ```
 
 ## Credits
-- (shadcn)[https://ui.shadcn.com/]
+- [shadcn](https://ui.shadcn.com/)
