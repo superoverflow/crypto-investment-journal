@@ -17,8 +17,8 @@ type CardProps = React.ComponentProps<typeof Card> & {
 
 const socketUrl = "wss://stream.binance.com:9443/ws"
 
-function Price({ price }: { price: number }) {
-  return <div>{price}</div>
+function Price({ price }: { price: string }) {
+  return <div>{parseFloat(price).toFixed(2)}</div>
 }
 
 export function CryptoDashboardCard({
@@ -29,9 +29,10 @@ export function CryptoDashboardCard({
   className,
   ...props
 }: CardProps) {
-  const [close, setClose] = useState(0)
+  const [close, setClose] = useState("0.00")
   const { sendJsonMessage } = useWebSocket(socketUrl, {
     onMessage: (event) => {
+      //console.log({event})
       const json = JSON.parse(event.data)
       setClose(json.c)
     },
