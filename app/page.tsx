@@ -1,3 +1,4 @@
+import { CryptoDashboardCard } from "@/components/CryptoDashboardCard"
 import { DashboardCard } from "@/components/DashboardCard"
 
 const dashboardItems = [
@@ -39,6 +40,12 @@ export default function IndexPage() {
             change={item.change}
           />
         ))}
+        <CryptoDashboardCard
+            instrument={"BTC"}
+            image={"https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/bitcoin.png"}
+            position={"$1000"}
+            change={20}
+        />
       </div>
     </section>
   )
