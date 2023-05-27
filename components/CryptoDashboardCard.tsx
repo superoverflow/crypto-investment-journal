@@ -1,12 +1,16 @@
-"use client"
-
-import { useEffect, useState } from "react"
 import Image from "next/image"
 import { ArrowDown, ArrowUp } from "lucide-react"
-import useWebSocket from "react-use-websocket"
+
+import Chart from '@/components/CryptoPriceChartWrapper'
+import Price from '@/components/CryptoLivePrice'
 
 import { cn } from "@/lib/utils"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 type CardProps = React.ComponentProps<typeof Card> & {
   instrument: string
@@ -15,13 +19,9 @@ type CardProps = React.ComponentProps<typeof Card> & {
   change: number
 }
 
-const socketUrl = "wss://stream.binance.com:9443/ws"
 
-function Price({ price }: { price: string }) {
-  return <div>{parseFloat(price).toFixed(2)}</div>
-}
 
-export function CryptoDashboardCard({
+export default function CryptoDashboardCard({
   instrument,
   image,
   position,
@@ -29,43 +29,30 @@ export function CryptoDashboardCard({
   className,
   ...props
 }: CardProps) {
-  const [close, setClose] = useState("0.00")
-  const { sendJsonMessage } = useWebSocket(socketUrl, {
-    onMessage: (event) => {
-      //console.log({event})
-      const json = JSON.parse(event.data)
-      setClose(json.c)
-    },
-  })
-  useEffect(
-    () =>
-      sendJsonMessage({
-        method: "SUBSCRIBE",
-        params: ["btcusdt@miniTicker"],
-        id: 1,
-      }),
-    [sendJsonMessage]
-  )
 
+  console.log("refreshed Card")
   return (
     <Card
-      className={cn("w-[90%] min-w-[260px] sm:w-[380px]", className)}
+      className={cn("w-[380px]", className)}
       {...props}
     >
-      <CardHeader className="place-content-between">
-        <CardTitle>{instrument}</CardTitle>
+      <CardHeader className="flex items-center gap-4">
         <Image src={image} alt={instrument} width={32} height={32} />
+        <CardTitle>{instrument}</CardTitle>
+        <Price />
       </CardHeader>
-      <CardContent className="flex justify-between gap-2">
-        <Price price={close} />
-        <span className="text-xl font-bold">{position}</span>
-        <div
-          className={`${
-            change >= 0 ? "text-green-500" : "text-red-500"
-          } flex flex-row items-center gap-2 px-2`}
-        >
-          {change >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
-          <span className="inline-block align-bottom text-sm">{change}</span>
+      <CardContent className="flex flex-col justify-between gap-2">
+        <Chart width={320} height={100} />
+        <div className="flex place-content-between">
+          <span className="text-xl font-bold">{position}</span>
+          <div
+            className={`${
+              change >= 0 ? "text-green-500" : "text-red-500"
+            } flex flex-row items-center gap-2 px-2`}
+          >
+            {change >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
+            <span className="inline-block align-bottom text-sm">{change}</span>
+          </div>
         </div>
       </CardContent>
     </Card>

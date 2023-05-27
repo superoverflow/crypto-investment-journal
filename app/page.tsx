@@ -1,5 +1,11 @@
-import { CryptoDashboardCard } from "@/components/CryptoDashboardCard"
+import dynamic from "next/dynamic"
 import { DashboardCard } from "@/components/DashboardCard"
+import CryptoDashboardCard from '@/components/CryptoDashboardCard'
+
+// const CryptoDashboardCard = dynamic(
+//   () => import('@/components/CryptoDashboardCard'),
+//   { ssr: false }
+// )
 
 const dashboardItems = [
   {
@@ -29,11 +35,13 @@ const dashboardItems = [
 ]
 
 export default function IndexPage() {
+  console.log("refreshed Page")
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex flex-wrap justify-center gap-2">
         {dashboardItems.map((item) => (
           <DashboardCard
+            key={item.instrument}
             instrument={item.instrument}
             image={item.image}
             position={item.position}
@@ -41,6 +49,7 @@ export default function IndexPage() {
           />
         ))}
         <CryptoDashboardCard
+            key={"cyrpto"}
             instrument={"BTC"}
             image={"https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/bitcoin.png"}
             position={"$1000"}
