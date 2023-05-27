@@ -10,6 +10,7 @@ async function getData(symbol: string): Promise<number[][]> {
   const response = await fetch(
     `https://api.binance.com/api/v3/klines?symbol=${code}&interval=1d&limit=100`
   )
+  console.log({response})
   const json = await response.json()
   return json
 }
@@ -22,9 +23,8 @@ async function ChartWrapper({
   height: number
 }) {
   console.log("refreshed Chart Wrapper")
-  const data: number[][] = await getData("btcusdt")
-  // @ts-ignore
-  const chartData = (data as number[][]).map((elem) => ({close: elem[2]}))
+  const data = await getData("btcusdt")
+  const chartData = data.map((elem) => ({close: elem[2]}))
   return <Chart width={width} height={height} chartData={chartData} />
 }
 
