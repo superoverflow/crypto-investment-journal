@@ -5,7 +5,7 @@ const Chart = dynamic(() => import("@/components/CryptoPriceChart"), {
   ssr: false,
 })
 
-async function getData(symbol: string) {
+async function getData(symbol: string): Promise<number[][]> {
   const code = symbol.toUpperCase()
   const response = await fetch(
     `https://api.binance.com/api/v3/klines?symbol=${code}&interval=1d&limit=100`
@@ -23,7 +23,7 @@ async function ChartWrapper({
 }) {
   console.log("refreshed Chart Wrapper")
   const data = await getData("btcusdt")
-  const chartData = data.map((elem: any) => ({close: elem[2]}))
+  const chartData = data.map((elem) => ({close: elem[2]}))
   return <Chart width={width} height={height} chartData={chartData} />
 }
 
