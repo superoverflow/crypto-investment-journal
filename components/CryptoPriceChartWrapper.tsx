@@ -23,7 +23,7 @@ async function ChartWrapper({
 }) {
   console.log("refreshed Chart Wrapper")
   const data: number[][] = await getData("btcusdt")
-  const chartData = data.map((elem) => ({close: elem[2]}))
+  const chartData = (data as number[][]).map((elem) => ({close: elem[2]}))
   return <Chart width={width} height={height} chartData={chartData} />
 }
 
