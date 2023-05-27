@@ -42,6 +42,7 @@ export default function CryptoDashboardCard({
         <Price />
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
+        {/* @ts-expect-error Server Component */}
         <Chart width={320} height={100} />
         <div className="flex place-content-between">
           <span className="text-xl font-bold">{position}</span>
