@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import useWebSocket from "react-use-websocket"
 
 const socketUrl = "wss://stream.binance.com:9443/ws"
@@ -26,7 +26,10 @@ function Price() {
 
   return (
     <div className="grow text-end font-semibold transition-colors">
-      $ {parseFloat(close).toLocaleString()}
+      ${" "}
+      {parseFloat(close).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+      })}
     </div>
   )
 }
