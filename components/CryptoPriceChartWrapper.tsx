@@ -13,7 +13,7 @@ async function ChartWrapper({
   height: number
 }) {
   console.log("refreshed Chart Wrapper")
-  return <Chart width={width} height={height} />
+  return <Chart width={width} height={height} code={"BTCUSDT"} />
 }
 
 export default ChartWrapper
