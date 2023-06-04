@@ -25,7 +25,7 @@ export default function CryptoDashboardCard({
 }: CardProps) {
   console.log("refreshed Card")
   return (
-    <Card className={cn("w-[340px]", className)} {...props}>
+    <Card className={cn("w-[300px]", className)} {...props}>
       <CardHeader className="flex items-center gap-4">
         <Image src={image} alt={instrument} width={32} height={32} />
         <CardTitle>{instrument}</CardTitle>
@@ -33,7 +33,7 @@ export default function CryptoDashboardCard({
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
         {/* @ts-expect-error Server Component */}
-        <Chart width={300} height={100} code={code} />
+        <Chart width={260} height={100} code={code} />
         <div className="flex place-content-between">
           <span className="text-xl font-bold">{position}</span>
           <div

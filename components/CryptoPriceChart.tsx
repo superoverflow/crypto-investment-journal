@@ -7,17 +7,8 @@ type ChartPrice = {
   close: number
 }
 
-export type CryptoCode =
-  | "BTCUSDT"
-  | "ETHUSDT"
-  | "SOLUSDT"
-  | "ADAUSDT"
-  | "BNBUSDT"
-  | "GALAUSDT"
-  | "ROSEUSDT"
-
 async function fetchData(
-  code: CryptoCode,
+  code: string,
   callback: Dispatch<SetStateAction<ChartPrice[]>>
 ) {
   const response = await fetch(
@@ -36,7 +27,7 @@ function Chart({
 }: {
   width: number
   height: number
-  code: CryptoCode
+  code: string
 }) {
   const [chartData, setChartData] = useState<ChartPrice[]>([])
   useEffect(() => {
