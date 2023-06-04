@@ -6,14 +6,16 @@ const Chart = dynamic(() => import("@/components/CryptoPriceChart"), {
 })
 
 async function ChartWrapper({
+  code,
   width,
   height,
 }: {
+  code: string
   width: number
   height: number
 }) {
-  console.log("refreshed Chart Wrapper")
-  return <Chart width={width} height={height} code={"BTCUSDT"} />
+  const ticker = code.toLocaleUpperCase()
+  return <Chart width={width} height={height} code={ticker} />
 }
 
 export default ChartWrapper

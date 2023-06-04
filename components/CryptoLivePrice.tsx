@@ -5,7 +5,10 @@ import useWebSocket from "react-use-websocket"
 
 const socketUrl = "wss://stream.binance.com:9443/ws"
 
-function Price() {
+
+// TODO: need to move ws to manage centrally
+function Price({ code }: {code: string}) {
+  const ticketCode = `${code.toLocaleLowerCase()}@miniTicker`
   const [close, setClose] = useState("0.00")
 
   const { sendJsonMessage } = useWebSocket(socketUrl, {
@@ -19,10 +22,10 @@ function Price() {
   useEffect(() => {
     sendJsonMessage({
       method: "SUBSCRIBE",
-      params: ["btcusdt@miniTicker"],
+      params: [ticketCode],
       id: 1,
     })
-  }, [sendJsonMessage])
+  }, [sendJsonMessage, ticketCode])
 
   return (
     <div className="grow text-end font-semibold transition-colors">

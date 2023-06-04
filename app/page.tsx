@@ -10,27 +10,17 @@ import CryptoDashboardCard from '@/components/CryptoDashboardCard'
 const dashboardItems = [
   {
     instrument: "BTC",
+    code: "BTCUSDT",
     image: "https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/bitcoin.png",
-    position: "£ 1,000",
+    position: 1000,
     change: -300
   },
   {
     instrument: "ETH",
+    code: "ETHUSDT",
     image: "https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/ethereum.png",
-    position: "£ 980",
+    position: 980,
     change: -200
-  },
-  {
-    instrument: "XAU",
-    image: "https://assets.xm-cdn.com/static/research-portal/instruments_icons/gold.svg",
-    position: "£ 3,080",
-    change: 20
-  },
-  {
-    instrument: "XAG",
-    image: "https://assets.xm-cdn.com/static/research-portal/instruments_icons/silver.svg",
-    position: "£ 2,050",
-    change: -520
   },
 ]
 
@@ -40,21 +30,15 @@ export default function IndexPage() {
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex flex-wrap justify-center gap-2">
         {dashboardItems.map((item) => (
-          <DashboardCard
+          <CryptoDashboardCard
             key={item.instrument}
             instrument={item.instrument}
+            code={item.code}
             image={item.image}
             position={item.position}
             change={item.change}
           />
         ))}
-        <CryptoDashboardCard
-            key={"cyrpto"}
-            instrument={"BTC"}
-            image={"https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/bitcoin.png"}
-            position={"$1000"}
-            change={20}
-        />
       </div>
     </section>
   )
