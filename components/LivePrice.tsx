@@ -7,9 +7,11 @@ import type { WSData } from "./LivePriceProvider"
 
 function Price({ code, lastData }: { code: string, lastData: WSData }){
   const [lastPrice, setLastPrice] = useState("0.0")
-  if (lastData?.s === code) {
-    setLastPrice(lastData?.c)
-  }
+  useEffect(() => {
+    if(lastData?.s === code) {
+      setLastPrice(lastData.c)
+    }
+  }, [lastData, code])
   return <div>{lastPrice}</div>
 }
 
