@@ -17,14 +17,10 @@ function Price({ code, lastData }: { code: string, lastData: WSData }){
 
 function PriceWrapper({ code }: { code: string }) {
   const lastData = useContext(DataContext)
-  // eslint-disable-next-line react/display-name
-  const PriceMemo = React.memo(() => <Price code={code} lastData={lastData} />)
-  return <PriceMemo />
+  return <Price code={code} lastData={lastData} />
 }
 
 function PriceSubscriber({ code }: { code: string }) {
-  // eslint-disable-next-line react/display-name
-  const PriceWrapperMemo = React.memo(() => <PriceWrapper code={code} />)
   const { isReady, subscriptionFn } = useContext(WSContext)
   useEffect(() => {
     if (isReady && subscriptionFn) {
@@ -32,7 +28,7 @@ function PriceSubscriber({ code }: { code: string }) {
     }
   }, [code, isReady, subscriptionFn])
 
-  return <PriceWrapperMemo />
+  return <PriceWrapper code={code} />
 }
 
 export default PriceSubscriber
