@@ -1,27 +1,23 @@
-import dynamic from "next/dynamic"
-import { DashboardCard } from "@/components/DashboardCard"
 import CryptoDashboardCard from '@/components/CryptoDashboardCard'
 
-// const CryptoDashboardCard = dynamic(
-//   () => import('@/components/CryptoDashboardCard'),
-//   { ssr: false }
-// )
+import LivePriceProvider from '@/components/LivePriceProvider'
+import LivePrice from '@/components/LivePrice'
 
 const dashboardItems = [
-  {
-    instrument: "BTC",
-    code: "BTCUSDT",
-    image: "https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/bitcoin.png",
-    position: 1000,
-    change: -300
-  },
-  {
-    instrument: "ETH",
-    code: "ETHUSDT",
-    image: "https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/ethereum.png",
-    position: 980,
-    change: -200
-  },
+  // {
+  //   instrument: "BTC",
+  //   code: "BTCUSDT",
+  //   image: "https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/bitcoin.png",
+  //   position: 1000,
+  //   change: -300
+  // },
+  // {
+  //   instrument: "ETH",
+  //   code: "ETHUSDT",
+  //   image: "https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/ethereum.png",
+  //   position: 980,
+  //   change: -200
+  // },
 ]
 
 export default function IndexPage() {
@@ -40,6 +36,10 @@ export default function IndexPage() {
           />
         ))}
       </div>
+      <LivePriceProvider>
+        <LivePrice code={"BTCUSDT"} />
+        <LivePrice code={"ETHUSDT"}/>
+      </LivePriceProvider>
     </section>
   )
 }
