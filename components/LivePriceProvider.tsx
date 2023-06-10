@@ -1,6 +1,13 @@
 "use client"
 
-import React, { createContext, useEffect, useRef, useState } from "react"
+import React, {
+  createContext,
+  useEffect,
+  useRef,
+  useState,
+  Dispatch,
+  SetStateAction
+} from "react"
 
 export type WSData = {
   E: number // timestamp     : 1686168483039
@@ -14,28 +21,23 @@ export type WSData = {
   v: string // volume        : "64709.23177000"
 } | null
 
-type SubscribedTickers = string[]
+type tickers = string[]
 
 type WS = {
-  isReady: boolean
-  subscriptionFn: (jsonMessage: any) => void
-  subscribedTickers: SubscribedTickers
+  setTickers: Dispatch<SetStateAction<tickers>> | null
 }
 
 const SOCKET_URL = "wss://stream.binance.com:9443/ws"
 
 export const DataContext = createContext<WSData>(null)
-export const WSContext = createContext<WS>({
-  isReady: false,
-  subscriptionFn: () => {},
-  subscribedTickers: []
-})
+export const WSContext = createContext<WS>({setTickers: null})
 
 function LivePriceProvider({ children }: { children: React.ReactNode }) {
   const ws = useRef<WebSocket | null>(null)
-  const messageSeq = useRef(0)
+  const messageSeq = useRef<number>(0)
+  const requestedTickers = useRef<tickers>([])
   const [isReady, setIsReady] = useState(false)
-  const [subscribedTickers, setSubscribedTickers] = useState<SubscribedTickers>([])
+  const [tickers, setTickers] = useState<tickers>([])
   const [lastData, setLastData] = useState<WSData | null>(null)
 
   useEffect(() => {
@@ -51,36 +53,38 @@ function LivePriceProvider({ children }: { children: React.ReactNode }) {
         console.log({ data })
       }
     }
-    return () => {
-      socket.close()
-    }
+    return () => socket.close()
   }, [])
 
-  const subscriptionFn = (tickerCode: string) => {
-    const sendFn = ws.current?.send.bind(ws.current)
-    const data = {
-      method: "SUBSCRIBE",
-      params: [`${tickerCode.toLowerCase()}@miniTicker`],
-      id: messageSeq.current,
-    }
-    const jsonData = JSON.stringify(data)
-    if (sendFn && !subscribedTickers.includes(tickerCode)) {
-      sendFn(jsonData)
-      messageSeq.current += 1
-      setSubscribedTickers((prev) => [...prev, tickerCode])
-      console.log({ jsonData })
-    }
-  }
+  useEffect(() => {
+    const subscribeTickers = setTimeout(() => {
+      const sendFn = ws.current?.send.bind(ws.current)
+      const newTickers = tickers.filter(
+        (t) => !requestedTickers.current.includes(t)
+      )
+      const params = newTickers.map((t) => `${t.toLowerCase()}@miniTicker`)
+      const data = {
+        method: "SUBSCRIBE",
+        params: params,
+        id: messageSeq.current,
+      }
+      const jsonData = JSON.stringify(data)
+      if (sendFn && isReady) {
+        sendFn(jsonData)
+        messageSeq.current += 1
+        requestedTickers.current = tickers
+        console.log({ jsonData })
+      }
+    }, 1000)
+
+    return () => clearTimeout(subscribeTickers)
+  }, [tickers, isReady])
 
   return (
-    <WSContext.Provider
-      value={{
-        isReady,
-        subscriptionFn,
-        subscribedTickers
-      }}
-    >
-      <DataContext.Provider value={lastData}>{children}</DataContext.Provider>
+    <WSContext.Provider value={{setTickers}}>
+      <DataContext.Provider value={lastData}>
+        {children}
+      </DataContext.Provider>
     </WSContext.Provider>
   )
 }

@@ -2,13 +2,12 @@
 
 import React, { useContext, useEffect, useState } from "react"
 
-import { DataContext, WSContext } from "./LivePriceProvider"
-import type { WSData } from "./LivePriceProvider"
+import { DataContext, WSContext, type WSData } from "./LivePriceProvider"
 
-function Price({ code, lastData }: { code: string, lastData: WSData }){
+function Price({ code, lastData }: { code: string; lastData: WSData }) {
   const [lastPrice, setLastPrice] = useState("0.0")
   useEffect(() => {
-    if(lastData?.s === code) {
+    if (lastData?.s === code) {
       setLastPrice(lastData.c)
     }
   }, [lastData, code])
@@ -21,13 +20,11 @@ function PriceWrapper({ code }: { code: string }) {
 }
 
 function PriceSubscriber({ code }: { code: string }) {
-  const { isReady, subscriptionFn } = useContext(WSContext)
+  const { setTickers } = useContext(WSContext)
+  console.log("re-render Price Subscriber.. ")
   useEffect(() => {
-    if (isReady && subscriptionFn) {
-      subscriptionFn(code)
-    }
-  }, [code, isReady, subscriptionFn])
-
+    setTickers && setTickers((prev) => [...prev, code])
+  }, [code, setTickers])
   return <PriceWrapper code={code} />
 }
 
