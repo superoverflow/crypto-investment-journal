@@ -3,6 +3,11 @@ This is an app displaying crypto live price and past 90 days close price chart. 
 - learning react context and its re-rendering
 - shadcn
 
+## background
+This is an app displaying crypto live price and past 90 days close price chart. Building this to learn
+- learning react context and its re-rendering
+- shadcn
+
 ## getting started
 - run 
 ```
