@@ -1,22 +1,21 @@
+## background
+This is an app displaying crypto live price and past 90 days close price chart. Building this to learn
+- learning react context and its re-rendering
+- shadcn
+
 ## getting started
-- make `.env.local`
-```
-GOOGLE_CLIENT_EMAIL=<service-account-name>@<your gcp project>.iam.gserviceaccount.com
-GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n......\n-----END PRIVATE KEY-----\n"
-GOOGLE_SHEET_ID=<google sheet id>
-ALPHAVANTAGE_API_KEY=<https://www.alphavantage.co/ api key>
-BINANCE_API_SECRET=
-BINANCE_API_KEY=
-```
 - run 
 ```
 npm run dev
 ```
 
-## Credits
-- [shadcn](https://ui.shadcn.com/)
+## Useful Reference
+- [React re-renders guide: everything, all at once](https://www.developerway.com/posts/react-re-renders-guide#part7.1)
+- [Debouncing in React – How to Delay a JS Function](https://www.freecodecamp.org/news/debouncing-explained/) 
 
-
-## APIs
+## Useful APIs
 - [Binance](http://localhost:3000/api/binance)
 - [Alphavantage](http://localhost:3000/api/alphavantage)
+
+## Credits
+- [shadcn](https://ui.shadcn.com/)
