@@ -33,9 +33,11 @@ export const DataContext = createContext<WSData>(null)
 export const WSContext = createContext<WS>({setTickers: null})
 
 function LivePriceProvider({ children }: { children: React.ReactNode }) {
+  console.log("re-render Context Provider")
   const ws = useRef<WebSocket | null>(null)
   const messageSeq = useRef<number>(0)
   const requestedTickers = useRef<tickers>([])
+  
   const [isReady, setIsReady] = useState(false)
   const [tickers, setTickers] = useState<tickers>([])
   const [lastData, setLastData] = useState<WSData | null>(null)

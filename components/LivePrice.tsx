@@ -16,6 +16,7 @@ function Price({ code, lastData }: { code: string; lastData: WSData }) {
 
 function PriceWrapper({ code }: { code: string }) {
   const lastData = useContext(DataContext)
+  console.log("re-render PriceWrapper.. ")
   return <Price code={code} lastData={lastData} />
 }
 
