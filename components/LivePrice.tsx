@@ -23,7 +23,6 @@ function PriceWrapper({ code }: { code: string }) {
 
 function PriceSubscriber({ code }: { code: string }) {
   const { setTickers } = useContext(WSContext)
-  console.log("re-render Price Subscriber.. ")
   useEffect(() => {
     setTickers && setTickers((prev) => [...prev, code])
   }, [code, setTickers])

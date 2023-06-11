@@ -21,8 +21,6 @@ export default function CryptoDashboardCard({
   className,
   ...props
 }: CardProps) {
-  console.log("refreshed Card")
-  
   return (
     <Card className={cn("w-[300px]", className)} {...props}>
       <CardHeader className="flex items-center gap-4">

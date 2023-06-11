@@ -19,3 +19,4 @@ npm run dev
 
 ## Credits
 - [shadcn](https://ui.shadcn.com/)
+- [cryptocurrency-icons](https://github.com/ErikThiart/cryptocurrency-icons)
