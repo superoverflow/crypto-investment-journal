@@ -11,8 +11,7 @@ type CardProps = React.ComponentProps<typeof Card> & {
   code: string
   image: string
   livePrice: React.ReactNode
-  position: number
-  change: number
+  livePnL: React.ReactNode
 }
 
 export default function CryptoDashboardCard({
@@ -20,34 +19,23 @@ export default function CryptoDashboardCard({
   code,
   image,
   livePrice,
-  position,
-  change,
+  livePnL,
   className,
   ...props
 }: CardProps) {
   console.log("refreshed Card")
+  
   return (
     <Card className={cn("w-[300px]", className)} {...props}>
       <CardHeader className="flex items-center gap-4">
         <Image src={image} alt={instrument} width={32} height={32} />
-        <CardTitle>{instrument}</CardTitle>
+        <CardTitle className="flex-auto">{instrument}</CardTitle>
         {livePrice}
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
         {/* @ts-expect-error Server Component */}
         <Chart width={260} height={100} code={code} />
-        <div className="flex place-content-between">
-          <span className="text-xl font-bold">{position}</span>
-          <div
-            className={cn(
-              change >= 0 ? "text-green-500" : "text-red-500",
-              "flex flex-row items-center gap-2 px-2"
-            )}
-          >
-            {change >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
-            <span className="inline-block align-bottom text-sm">{change}</span>
-          </div>
-        </div>
+        {livePnL}
       </CardContent>
     </Card>
   )

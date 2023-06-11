@@ -11,7 +11,9 @@ function Price({ code, lastData }: { code: string; lastData: WSData }) {
       setLastPrice(lastData.c)
     }
   }, [lastData, code])
-  return <div>{lastPrice}</div>
+  return (
+    <div>{parseFloat(lastPrice).toFixed(4)}</div>
+  )
 }
 
 function PriceWrapper({ code }: { code: string }) {

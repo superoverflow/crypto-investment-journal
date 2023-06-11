@@ -1,18 +1,11 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "My Investment Journal",
+  name: "",
   description:
-    "Investment Tracker",
-  mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
-  ],
+    "Tracking Crypto P&L with binance public websocket and api",
+  mainNav: [],
   links: {
-    twitter: "https://twitter.com/shadcn",
     github: "https://github.com/superoverflow/crypto-investment-journal",
-    docs: "https://ui.shadcn.com",
   },
 }
