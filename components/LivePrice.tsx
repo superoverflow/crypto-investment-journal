@@ -12,7 +12,7 @@ function Price({ code, lastData }: { code: string; lastData: WSData }) {
     }
   }, [lastData, code])
   return (
-    <div>
+    <div>${" "}
       {parseFloat(lastPrice).toLocaleString(undefined, {
         minimumFractionDigits: 4,
       })}
