@@ -33,7 +33,6 @@ export const DataContext = createContext<WSData>(null)
 export const WSContext = createContext<WS>({setTickers: null})
 
 function LivePriceProvider({ children }: { children: React.ReactNode }) {
-  console.log("re-render Context Provider")
   const ws = useRef<WebSocket | null>(null)
   const messageSeq = useRef<number>(0)
   const requestedTickers = useRef<tickers>([])
@@ -52,7 +51,6 @@ function LivePriceProvider({ children }: { children: React.ReactNode }) {
       const data = JSON.parse(event.data)
       if (data?.e === "24hrMiniTicker") {
         setLastData(data)
-        console.log({ data })
       }
     }
     return () => socket.close()
@@ -75,7 +73,7 @@ function LivePriceProvider({ children }: { children: React.ReactNode }) {
         sendFn(jsonData)
         messageSeq.current += 1
         requestedTickers.current = tickers
-        console.log({ jsonData })
+        console.log({ data })
       }
     }, 1000)
 

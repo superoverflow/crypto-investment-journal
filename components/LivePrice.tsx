@@ -11,18 +11,18 @@ function Price({ code, lastData }: { code: string; lastData: WSData }) {
       setLastPrice(lastData.c)
     }
   }, [lastData, code])
-  return <div>{lastPrice}</div>
+  return (
+    <div>{parseFloat(lastPrice).toFixed(4)}</div>
+  )
 }
 
 function PriceWrapper({ code }: { code: string }) {
   const lastData = useContext(DataContext)
-  console.log("re-render PriceWrapper.. ")
   return <Price code={code} lastData={lastData} />
 }
 
 function PriceSubscriber({ code }: { code: string }) {
   const { setTickers } = useContext(WSContext)
-  console.log("re-render Price Subscriber.. ")
   useEffect(() => {
     setTickers && setTickers((prev) => [...prev, code])
   }, [code, setTickers])

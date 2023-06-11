@@ -1,4 +1,6 @@
 {
   "typescript.tsdk": "../../node_modules/.pnpm/typescript@4.9.5/node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  // FIXME: https://github.com/prettier/prettier-vscode/issues/3020
+  "prettier.prettierPath": "./node_modules/prettier"
 }
