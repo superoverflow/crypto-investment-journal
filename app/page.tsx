@@ -1,11 +1,7 @@
-import dynamic from "next/dynamic"
-import { DashboardCard } from "@/components/DashboardCard"
 import CryptoDashboardCard from '@/components/CryptoDashboardCard'
 
-// const CryptoDashboardCard = dynamic(
-//   () => import('@/components/CryptoDashboardCard'),
-//   { ssr: false }
-// )
+import LivePriceProvider from '@/components/LivePriceProvider'
+import LivePrice from '@/components/LivePrice'
 
 const dashboardItems = [
   {
@@ -27,6 +23,7 @@ const dashboardItems = [
 export default function IndexPage() {
   console.log("refreshed Page")
   return (
+    <LivePriceProvider>
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex flex-wrap justify-center gap-2">
         {dashboardItems.map((item) => (
@@ -34,12 +31,15 @@ export default function IndexPage() {
             key={item.instrument}
             instrument={item.instrument}
             code={item.code}
+            livePrice={<LivePrice code={item.code} />}
             image={item.image}
             position={item.position}
             change={item.change}
           />
         ))}
       </div>
+      
     </section>
+    </LivePriceProvider>
   )
 }

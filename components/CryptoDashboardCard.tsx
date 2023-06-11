@@ -3,13 +3,14 @@ import { ArrowDown, ArrowUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import Price from "@/components/CryptoLivePrice"
 import Chart from "@/components/CryptoPriceChartWrapper"
+import React from "react"
 
 type CardProps = React.ComponentProps<typeof Card> & {
   instrument: string
   code: string
   image: string
+  livePrice: React.ReactNode
   position: number
   change: number
 }
@@ -18,6 +19,7 @@ export default function CryptoDashboardCard({
   instrument,
   code,
   image,
+  livePrice,
   position,
   change,
   className,
@@ -29,7 +31,7 @@ export default function CryptoDashboardCard({
       <CardHeader className="flex items-center gap-4">
         <Image src={image} alt={instrument} width={32} height={32} />
         <CardTitle>{instrument}</CardTitle>
-        <Price code={code} />
+        {livePrice}
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
         {/* @ts-expect-error Server Component */}
