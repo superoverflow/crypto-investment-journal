@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useContext, useEffect, useState } from "react"
-import { ArrowDown, ArrowUp } from "lucide-react"
+import { TrendingUp, TrendingDown, DollarSign } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -28,17 +28,27 @@ function PnLWrapper({
 
   return (
     <div className="flex place-content-between">
-      <span className="text-xl font-bold">{marketValue.toFixed(2)}</span>
-      <div
-        className={cn(
-          change >= 0 ? "text-green-500" : "text-red-500",
-          "flex flex-row items-center gap-2 px-2"
-        )}
-      >
-        {change >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
-        <span className="inline-block align-bottom text-sm">
-          {change.toFixed(2)}
+      <div className="flex items-center justify-center gap-1">
+        <span className="align-middle text-xs text-slate-500">MV</span>
+        <DollarSign size={14} />
+        <span className="align-middle text-sm font-bold">
+          {marketValue.toFixed(2)}
         </span>
+      </div>
+
+      <div className="flex items-center justify-center">
+        <span className="align-middle text-xs text-slate-500">P/L</span>
+        <div
+          className={cn(
+            change >= 0 ? "text-green-500" : "text-red-500",
+            "flex flex-row items-center gap-2 px-2"
+          )}
+        >
+          {change >= 0 ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
+          <span className="inline-block align-bottom text-sm">
+            {change.toFixed(2)}
+          </span>
+        </div>
       </div>
     </div>
   )

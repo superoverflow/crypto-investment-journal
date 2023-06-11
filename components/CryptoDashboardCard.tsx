@@ -26,7 +26,7 @@ export default function CryptoDashboardCard({
       <CardHeader className="flex items-center gap-4">
         <Image src={image} alt={instrument} width={32} height={32} />
         <CardTitle className="flex-auto">{instrument}</CardTitle>
-        {livePrice}
+        <div className="font-bold">{livePrice}</div>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
         {/* @ts-expect-error Server Component */}
