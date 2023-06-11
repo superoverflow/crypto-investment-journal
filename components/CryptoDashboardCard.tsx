@@ -1,6 +1,4 @@
 import Image from "next/image"
-import { ArrowDown, ArrowUp } from "lucide-react"
-
 import { cn } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Chart from "@/components/CryptoPriceChartWrapper"
