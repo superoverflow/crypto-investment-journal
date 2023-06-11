@@ -11,7 +11,6 @@ const dashboardItems = [
       "https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/bitcoin.png",
     position: 0.03,
     averagePrice: 30000,
-    change: -300,
   },
   {
     instrument: "ETH",
@@ -20,7 +19,6 @@ const dashboardItems = [
       "https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/32/ethereum.png",
     position: 0.5,
     averagePrice: 2000,
-    change: -200,
   },
 ]
 
