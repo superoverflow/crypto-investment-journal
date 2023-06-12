@@ -1,9 +1,10 @@
 "use client"
 
 import React, { useContext, useEffect, useState } from "react"
-import { TrendingUp, TrendingDown, DollarSign } from "lucide-react"
+import { DollarSign, TrendingDown, TrendingUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Skeleton } from "@/components/ui/skeleton"
 
 import { DataContext } from "./LivePriceProvider"
 
@@ -17,12 +18,15 @@ function PnLWrapper({
   code: string
 }) {
   const lastData = useContext(DataContext)
-  const [lastPrice, setLastPrice] = useState(0.0)
+  const [lastPrice, setLastPrice] = useState<number>()
   useEffect(() => {
     if (lastData?.s === code) {
       setLastPrice(parseFloat(lastData.c))
     }
   }, [lastData, code])
+
+  if (!lastPrice) return <Skeleton className="h-[20px] w-[260px] rounded-full" />
+
   const marketValue = position * lastPrice
   const change = position * (lastPrice - averageCost)
 
